@@ -2,26 +2,14 @@ plugins {
     id 'idea'
     alias neoforge.plugins.neogradle
 }
-jarJar.enable()
 
 dependencies {
     implementation neoforge.neoforge
     compileOnly project(":Common")
 
     implementation libs.resourcefulconfig.neoforge
-    implementation libs.mixin.extras
-    jarJar(libs.mixin.extras) {
-        jarJar.ranged(it, "[${libs.versions.mixin.extras.get()},)")
-    }
 }
 
-jar {
-    archiveClassifier.set("slim")
-}
-
-tasks.jarJar.configure {
-    archiveClassifier.set('')
-}
 
 // Automatically enable neoforge AccessTransformers if the file exists
 // This location is hardcoded in FML and can not be changed.
@@ -96,12 +84,4 @@ tasks.named("sourcesJar", Jar) {
 
 processResources {
     from project(":Common").sourceSets.main.resources
-}
-
-publishing {
-    publications {
-        "mavenJava${project.name}"(MavenPublication) {
-            jarJar.component(it)
-        }
-    }
 }
