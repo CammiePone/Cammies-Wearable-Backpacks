@@ -3,7 +3,7 @@
 quilt_loom = "1.5.+"
 
 quilt_loader = "0.24.0"
-quilted_fabric_api = "9.0.0-alpha.1+local-0.96.4-1.20.4"
+quilted_fabric_api = "9.0.0-alpha.5+0.96.11-1.20.4"
 
 modmenu = "9.0.0"
 lazydfu = "0.1.3"
