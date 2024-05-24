@@ -11,8 +11,8 @@ dependencies {
     annotationProcessor "${libs.mixin.asProvider().get()}:processor"
 
     implementation fg.deobf(libs.resourcefulconfig.forge.get())
-    minecraftLibrary libs.mixin.extras
-    jarJar(libs.mixin.extras) {
+    minecraftLibrary libs.mixin.extras.asProvider().get()
+    jarJar(libs.mixin.extras.forge.get()) {
         jarJar.ranged(it, "[${libs.versions.mixin.extras.get()},)")
     }
 }
