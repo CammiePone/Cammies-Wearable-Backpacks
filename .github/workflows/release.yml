@@ -31,7 +31,7 @@ jobs:
         env:
           BUILD_TIME: ${{ steps.current-time.outputs.formattedTime }}
           BUILD_NUMBER: ${{ github.run_number }}
-        run: ./gradlew assemble
+        run: ./gradlew assemble --rerun-tasks
       - name: Maven Release
         if: steps.extract_maven_upload_url.outputs.maven_upload_url
         env:
@@ -66,3 +66,11 @@ jobs:
           files: |
             Quilt/build/libs/!(*-@(dev|sources|javadoc|slim)).jar
             Quilt/build/libs/*-@(sources|javadoc).jar
+      - name: Notify Discord
+        uses: Up-Mods/action-discord-release@main
+        with:
+          version: ${{ github.ref_name }}
+          webhook-url: ${{ secrets.ANNOUNCEMENT_WEBHOOK_URL }}
+          curseforge-project-id: ${{ steps.publish_quilt.outputs.curseforge-id }}
+          modrinth-project-id: ${{ steps.publish_quilt.outputs.modrinth-id }}
+          thumbnail-url: https://mod-assets.upcraft.dev/promo/cammies-wearable-backpacks/icon_128x.png
